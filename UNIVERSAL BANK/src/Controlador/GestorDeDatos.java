@@ -37,6 +37,7 @@ public class GestorDeDatos {
             if (usuarioscargados != null) {
                 usuarios = usuarioscargados;
                 proximoid =usuarios.stream()
+                        
                         .mapToInt(Usuario::getId)
                         .max()
                         .orElse(0) + 1;
