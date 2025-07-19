@@ -7,11 +7,15 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String clave;
-    private int cedula;
-    private int telefono;
+    private String cedula;///Talvez cambiar a String
+    private String telefono;///Talvez cambiar a String
     private String Fechadenacimiento;
     private List<Cuenta> cuentas;
     private List<Transaccion> transacciones;
+
+    public String getCedula() {return cedula;}
+
+    public String getCorreo() {return correo;}
 
     public int getId() {return id;}
 }

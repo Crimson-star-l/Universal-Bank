@@ -1,9 +1,8 @@
 package Util.Clases;
-
 import javax.swing.*;
 import java.awt.*;
-
 public class PanelConFondo extends JPanel{
+
     private Image fondo;
 
     public PanelConFondo(String ruta) {
