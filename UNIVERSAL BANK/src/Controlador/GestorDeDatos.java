@@ -193,6 +193,14 @@ public class GestorDeDatos {
 * 3.- NO TRABAJARÉ EN LA CLASE GestorDeDatos SI NO SE ME PIDIÓ .-. (esta clase es muy volátil)
 *
 *--------------------------------------------------------------------------------------------------------------------------------------------
+*
+*
+* -------------------------------------------------Resumen del proyecto------------------------------------------------
+*
+* Actualmente todas las clases inciales está preparadas solo falta seguir trabajando en la  lógica para que lo ultimo que hagamos sea el diseño del programa
+* El paquete llamado Data de momento no tiene nada sin embargo una vez se empieza a llenar la base de datos va a tener un archivo .json
+*
+* --------------------------------------------------------------------------------------------------------------------
 * */
 
 
