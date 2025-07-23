@@ -15,7 +15,7 @@ import java.lang.module.FindException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
+//Clase 
 public class GestorDeDatos {
         private static final String USUARIOS_DATA = "src/Data/usuarios.json";
         private static List<Usuario> usuarios = new ArrayList<>();
