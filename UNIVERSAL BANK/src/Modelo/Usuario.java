@@ -7,8 +7,8 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String clave;
-    private String cedula;///Talvez cambiar a String
-    private String telefono;///Talvez cambiar a String
+    private String cedula;
+    private String telefono;
     private String Fechadenacimiento;
     private List<Cuenta> cuentas;
     private List<Transaccion> transacciones;
