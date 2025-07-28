@@ -28,17 +28,27 @@ public class Usuario {
     }
 
     public int getId() { return id; }
-    public String getNombre() { return nombre; }
-    public String getCorreo() { return correo; }
-    public String getClave() { return clave; }
-    public String getCedula() { return cedula; }
-    public String getTelefono() { return telefono; }
-    public String getFechaDeNacimiento() { return fechaDeNacimiento; }
-    public List<Cuenta> getCuentas() { return cuentas; }
+    public void setId(int id) { this.id = id; }
 
+    public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo){ this.correo = correo; }
+
+    public String getClave() { return clave; }
     public void setClave(String clave) { this.clave = clave; }
+
+    public String getCedula() { return cedula; }
+    public void setCedula(String cedula) { this.cedula = cedula; }
+
+    public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
+
+    public String getFechaDeNacimiento() { return fechaDeNacimiento; }
+    public void setFechaDeNacimiento(String fechaDeNacimiento) {this.fechaDeNacimiento = fechaDeNacimiento; }
+
+    public List<Cuenta> getCuentas() { return cuentas; }
 
     public void agregarCuenta(Cuenta cuenta) {
         cuentas.add(cuenta);

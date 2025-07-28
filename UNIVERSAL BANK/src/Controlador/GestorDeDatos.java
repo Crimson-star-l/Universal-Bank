@@ -1,5 +1,8 @@
 package Controlador;
 
+import Modelo.Cuenta;
+import Modelo.Transaccion;
+import Util.Clases.Adaptador;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -15,17 +18,24 @@ import java.io.IOException;
 import java.lang.module.FindException;
 import java.lang.reflect.Type;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 //Clase 
 public class GestorDeDatos {
-        private static final String USUARIOS_DATA = "src/Data/usuarios.json";
+        private static final String USUARIOS_DATA = "UNIVERSAL BANK/src/Data/usuarios.json";
         private static List<Usuario> usuarios = new ArrayList<>();
-        private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        private static Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .registerTypeAdapter(LocalDateTime.class, new Adaptador())
+            .create();
         private static int proximoid=1;
+        private static Usuario usuarioActivo;
 
         ///
-        /// Métodos de carga de usuario
+        /// Métodos de carga y guardado
         ///  básicamente esta sección solo tiene funciones de cargar y guardar no voy a entrar en detalles solo vean el código .-.
         ///
 
@@ -91,18 +101,26 @@ public class GestorDeDatos {
     /// en pocas palabras las cosas que se van a hacer con los usuarios (crear y buscar, etc)
     ///
 
-    public static boolean crearUsuario(String nombre,String correo , int cedula,
-                                       String clave, int telefono, String Fechadenacimiento) {
+    public static boolean crearUsuario(String nombre, String correo, String clave, String cedula, String telefono, String fechaNacimiento) {
+        // Validar duplicados
+        if (buscarUsuarioCorreo(correo) != null) {
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario con este correo.");
+            return false;
+        }
 
-        ///NO TOCAR ESTA FUNCIÓN ///NO TOCAR ESTA FUNCIÓN
-        ///NO TOCAR ESTA FUNCIÓN///NO TOCAR ESTA FUNCIÓN
-        ///NO TOCAR ESTA FUNCIÓN ///NO TOCAR ESTA FUNCIÓN
-        ///NO TOCAR ESTA FUNCIÓN ///NO TOCAR ESTA FUNCIÓN
-        ///NO TOCAR ESTA FUNCIÓN ///NO TOCAR ESTA FUNCIÓN
+        if (buscarUsuarioCedula(cedula) != null) {
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario con esta cédula.");
+            return false;
+        }
 
-        /// enserio no la toquen .-. hice algo que no estaba bien aquí y perdí el orden de algunas cosas
-
+        // Crear usuario
+        Usuario nuevo = new Usuario(proximoid, nombre, correo, clave, cedula, telefono, fechaNacimiento);
+        usuarios.add(nuevo);
+        proximoid++;
+        guardarUsuarios();
+        return true;
     }
+
 
     public static Usuario buscarUsuarioCorreo(String correo) {
         return usuarios.stream()
@@ -126,18 +144,18 @@ public class GestorDeDatos {
     }
 
     public static Usuario validarLogin(String correoOnombre, String clave) {
-        for (Usuario usuario : usuarios) {//En pocas palabras recorre toda la lista de usuarios
-            //Esta va pa el chris
-            /*
-             * En pocas palabras tienes que validar que el inicio de sesión sea correcto
-             * más especificamenete que si se ingrese nombre o contraseña esten iguales a las de el usuario
-             * pero la clave si tiene que ser la misma
-             * */
+        for (Usuario usuario : usuarios) {
+            boolean coincideCorreo = usuario.getCorreo().equals(correoOnombre);
+            boolean coincideNombre = usuario.getNombre().equals(correoOnombre);
+            boolean claveCorrecta = usuario.getClave().equals(clave);
 
-
-            return usuario;//<---Esto no lo borres xd
+            if ((coincideCorreo || coincideNombre) && claveCorrecta) {
+                return usuario;
+            }
         }
+        return null; // No se encontró ningún usuario válido
     }
+
 
 
     ///
@@ -145,20 +163,209 @@ public class GestorDeDatos {
     /// Sección de métodos de cuenta bla bla bla bla bla
     ///
 
-    //por aquí va una función pa agregar un tipo de cuenta nuevo
+    public static boolean eliminarCuenta(Usuario usuario, Cuenta cuenta) {
+        int confirm = JOptionPane.showConfirmDialog(null,
+                "¿Seguro que quieres eliminar esta cuenta?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            usuario.getCuentas().remove(cuenta);
+            guardarUsuarios();
+            JOptionPane.showMessageDialog(null, "Cuenta eliminada correctamente");
+            return true;
+        }
+        return false;
+    }
 
 
-    //por aquí una de crear cuenta nueva
+    public static boolean agregarCuenta(Usuario usuario, Cuenta.TipoCuenta tipo) {
+        // Validar que no tenga una cuenta del mismo tipo
+        if (usuario.getCuentas().stream().anyMatch(c -> c.getTipo().equals(tipo))) {
+            JOptionPane.showMessageDialog(null, "Ya posee una cuenta de ese tipo");
+            return false;
+        }
 
-    //y una para buscar otras cuentas por id/número lo que sea
+        // Validar que no tenga más de 2 cuentas
+        if (usuario.getCuentas().size() >= 2) {
+            JOptionPane.showMessageDialog(null, "Límite de cuentas alcanzado");
+            return false;
+        }
+
+        // Desactivar cuentas actuales
+        for (Cuenta c : usuario.getCuentas()) {
+            c.setActiva(false);
+        }
+
+        // Crear una nueva cuenta
+        Cuenta nuevaCuenta = new Cuenta(tipo, 0.0);
+        nuevaCuenta.setActiva(true);
+
+        usuario.getCuentas().add(nuevaCuenta);
+        guardarUsuarios();
+
+        JOptionPane.showMessageDialog(null, "La nueva cuenta fue creada exitosamente");
+        return true;
+    }
 
 
+
+
+    public static Cuenta buscarCuentaid(String numerodecuenta){
+        for (Usuario usuario : usuarios) {//Busca en todos los usuarios cada múmero de cuenta
+            for (Cuenta cuenta : usuario.getCuentas()) {
+                if (cuenta.getNumerodecuenta().equals(numerodecuenta)) {
+                    return cuenta;
+                }
+            }
+        }
+        return null;
+    }
 
     ///
     /// Métodos de transacción
     /// Sección de métodos de transacción la maldita clase vacia (no cociné)
     ///
 
+
+    public static boolean retirar(double monto, Cuenta cuenta, int usuarioId) {
+        if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "Monto inválido");
+            return false;
+        }
+
+        if (cuenta.getSaldo() < monto) {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+            return false;
+        }
+
+        cuenta.setSaldo(cuenta.getSaldo() - monto);
+
+        Transaccion t = new Transaccion(
+                usuarioId,
+                cuenta.getNumerodecuenta(),
+                Transaccion.TipoTransaccion.RETIRO,
+                monto,
+                "Retiro en ventanilla"
+        );
+        t.completarTransaccion();
+        cuenta.agregarTransaccion(t);
+
+        guardarUsuarios();
+        JOptionPane.showMessageDialog(null, "Retiro exitoso");
+        return true;
+    }
+
+
+
+
+    public static boolean depositar(Usuario usuario, String numeroCuenta, double monto) {
+        if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "El monto debe ser mayor que 0");
+            return false;
+        }
+
+        Cuenta cuenta = usuario.getCuentas().stream()
+                .filter(c -> c.getNumerodecuenta().equals(numeroCuenta))
+                .findFirst()
+                .orElse(null);
+
+        if (cuenta == null) {
+            JOptionPane.showMessageDialog(null, "No existe cuenta con ese número");
+            return false;
+        }
+
+        // Actualizar saldo
+        cuenta.setSaldo(cuenta.getSaldo() + monto);
+
+        // Crear transacción
+        Transaccion transaccion = new Transaccion(
+                usuario.getId(),
+                numeroCuenta,
+                Transaccion.TipoTransaccion.DEPOSITO,
+                monto,
+                "Depósito a cuenta"
+        );
+        transaccion.setId(usuario.getTransacciones().size() + 1);
+        transaccion.completarTransaccion();
+
+        // Guardar en usuario
+        usuario.agregarTransaccion(transaccion);
+        guardarUsuarios();
+        return true;
+    }
+
+    public static boolean transferir(Usuario emisor, String cuentaOrigen, String cuentaDestino, double monto) {
+        if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "El monto debe ser mayor que 0");
+            return false;
+        }
+
+        Cuenta origen = emisor.getCuentas().stream()
+                .filter(c -> c.getNumerodecuenta().equals(cuentaOrigen))
+                .findFirst()
+                .orElse(null);
+
+        if (origen == null) {
+            JOptionPane.showMessageDialog(null, "Cuenta origen no encontrada");
+            return false;
+        }
+
+        if (origen.getSaldo() < monto) {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+            return false;
+        }
+
+        Cuenta destino = buscarCuentaid(cuentaDestino);
+        if (destino == null) {
+            JOptionPane.showMessageDialog(null, "Cuenta destino no encontrada");
+            return false;
+        }
+
+        // Buscar el usuario destino de la transferencia si alguien llega a leer esto que sepa que me arrepiento de elegir este bendito proyecto .-.
+        Usuario receptor = usuarios.stream()
+                .filter(u -> u.getCuentas().contains(destino))
+                .findFirst()
+                .orElse(null);
+
+        if (receptor == null) {
+            JOptionPane.showMessageDialog(null, "Usuario receptor no encontrado");
+            return false;
+        }
+
+        // Transferencia
+        origen.setSaldo(origen.getSaldo() - monto);
+        destino.setSaldo(destino.getSaldo() + monto);
+
+        // Transacción emisor
+        Transaccion transEmisor = new Transaccion(
+                emisor.getId(),
+                cuentaOrigen,
+                cuentaDestino,
+                Transaccion.TipoTransaccion.TRANSFERENCIA,
+                monto,
+                "Transferencia enviada"
+        );
+        transEmisor.setId(emisor.getTransacciones().size() + 1);
+        transEmisor.completarTransaccion();
+        emisor.agregarTransaccion(transEmisor);
+
+        // Transacción receptor
+        Transaccion transReceptor = new Transaccion(
+                receptor.getId(),
+                cuentaOrigen,
+                cuentaDestino,
+                Transaccion.TipoTransaccion.TRANSFERENCIA,
+                monto,
+                "Transferencia recibida"
+        );
+        transReceptor.setId(receptor.getTransacciones().size() + 1);
+        transReceptor.completarTransaccion();
+        receptor.agregarTransaccion(transReceptor);
+
+        guardarUsuarios();
+        return true;
+    }
 
 
     ///
