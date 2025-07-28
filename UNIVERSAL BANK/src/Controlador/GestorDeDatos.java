@@ -2,17 +2,19 @@ package Controlador;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import Modelo.Usuario;
-import com.google.gson.reflect.TypeToken;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.lang.module.FindException;
 import java.lang.reflect.Type;
+
 import java.util.ArrayList;
 import java.util.List;
 //Clase 
@@ -42,13 +44,11 @@ public class GestorDeDatos {
 
             if (usuarioscargados != null) {
                 usuarios = usuarioscargados;
-                proximoid =usuarios.stream()
-                        
+                proximoid = usuarios.stream()
                         .mapToInt(Usuario::getId)
                         .max()
                         .orElse(0) + 1;
             }
-
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Error al cargar usuarios: " + e.getMessage(),  "Error", JOptionPane.ERROR_MESSAGE );
             usuarios = new ArrayList<>();
@@ -66,7 +66,6 @@ public class GestorDeDatos {
             FileWriter writer = new FileWriter(archivo);
             gson.toJson(usuarios, writer);
             writer.close();
-
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error al guardar usuarios: "+e.getMessage(),   "Error", JOptionPane.ERROR_MESSAGE );
         }

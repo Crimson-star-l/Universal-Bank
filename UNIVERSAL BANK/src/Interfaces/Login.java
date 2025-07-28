@@ -9,7 +9,7 @@ public class Login extends JFrame {
     private JPanel panellogin;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton iniciarSesiónButton;
+    private JButton iniciarSesionButton;
     private JButton registrarseButton;
 
     public Login() {

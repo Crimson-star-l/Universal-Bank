@@ -57,9 +57,9 @@ public class Transaccion {
     ///    SECCIÓN DE MÉTODOS DE MOVIMIENTOS
     ///
 
-    public boolean esTransferencia(){
+    public boolean esTransferencia() {
         return tipo == TipoTransaccion.TRANSFERENCIA && cuentaDestino != null;
-    }
+}
 
     public boolean moviminetopropio(){
         return tipo == TipoTransaccion.DEPOSITO || tipo == TipoTransaccion.RETIRO;
@@ -91,18 +91,18 @@ public class Transaccion {
      * y con esos pasos tenemos un número de referencia de la transacción únicos bastante interesante :b
      */
     private String generarReferencia() {
-        return "TRX" + System.currentTimeMillis() + String.valueOf((int)(Math.random() * 1000));
+        return "TRX" + System.currentTimeMillis() + String.valueOf((int)(Math.random() * 1000));/// 0.5 * 1000 ->500.00 ->500 -> "500" -> TRX500
     }
 
     public String getFechaFormateada(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");/// 07/11/2025 08:27:34
         return fecha.format(formatter);
     }
 
     public String getResumenTransaccion() {
         StringBuilder resumen = new StringBuilder();
         resumen.append(tipo.toString())
-                .append(" - $").append(String.format("%.2f", monto))
+                .append(" - $").append(String.format("%.2f", monto))  ///
                 .append(" - ").append(getFechaFormateada())
                 .append(" - ").append(estado.toString());
         return resumen.toString();
