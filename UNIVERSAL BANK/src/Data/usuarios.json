@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "nombre": "test",
+    "correo": "test@gmail.com",
+    "clave": "test123",
+    "cedula": "8-1018-422",
+    "telefono": "6256-1696",
+    "fechaDeNacimiento": "2005-01-19",
+    "cuentas": [],
+    "transacciones": []
+  },
+  {
+    "id": 2,
+    "nombre": "prueba",
+    "correo": "prub@gmail.com",
+    "clave": "prub123",
+    "cedula": "8-1234-299",
+    "telefono": "6323-2334",
+    "fechaDeNacimiento": "2005-12-04",
+    "cuentas": [],
+    "transacciones": []
+  }
+]
