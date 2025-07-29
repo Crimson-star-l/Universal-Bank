@@ -8,7 +8,8 @@
     "telefono": "6256-1696",
     "fechaDeNacimiento": "2005-01-19",
     "cuentas": [],
-    "transacciones": []
+    "transacciones": [],
+    "cuentaActiva": 0
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "telefono": "6323-2334",
     "fechaDeNacimiento": "2005-12-04",
     "cuentas": [],
-    "transacciones": []
+    "transacciones": [],
+    "cuentaActiva": 0
   },
   {
     "id": 3,
@@ -38,7 +40,8 @@
         "historial": []
       }
     ],
-    "transacciones": []
+    "transacciones": [],
+    "cuentaActiva": 0
   },
   {
     "id": 4,
@@ -52,11 +55,538 @@
       {
         "numerodecuenta": "C1753759311136",
         "tipo": "AHORRO",
-        "saldo": 0.0,
+        "saldo": 99.99999999999997,
         "activa": true,
-        "historial": []
+        "historial": [
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "tipo": "RETIRO",
+            "monto": 23.44,
+            "fecha": "2025-07-29T16:20:22.625241631",
+            "descripcion": "Retiro en ventanilla",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753824022625287"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "tipo": "RETIRO",
+            "monto": 16.22,
+            "fecha": "2025-07-29T16:20:38.971239929",
+            "descripcion": "Retiro en ventanilla",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753824038971157"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "tipo": "RETIRO",
+            "monto": 12.33,
+            "fecha": "2025-07-29T16:39:23.991635417",
+            "descripcion": "Retiro en ventanilla",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753825163991177"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "tipo": "RETIRO",
+            "monto": 10.22,
+            "fecha": "2025-07-29T16:44:37.700243707",
+            "descripcion": "Retiro en ventanilla",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753825477700399"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "tipo": "RETIRO",
+            "monto": 12.22,
+            "fecha": "2025-07-29T17:34:06.668531599",
+            "descripcion": "Retiro en ventanilla",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753828446668252"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 20.44,
+            "fecha": "2025-07-29T17:47:44.86795436",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829264868287"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 12.33,
+            "fecha": "2025-07-29T17:47:49.439500087",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829269439247"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 13.67,
+            "fecha": "2025-07-29T17:47:54.378792096",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829274378202"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 1.56,
+            "fecha": "2025-07-29T17:48:04.04091711",
+            "estado": "COMPLETADA",
+            "referencia": "TRX175382928404094"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 5.5,
+            "fecha": "2025-07-29T17:48:33.974282415",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829313974745"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 209.45,
+            "fecha": "2025-07-29T17:55:31.769355266",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829731769554"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 145.88,
+            "fecha": "2025-07-29T17:55:55.410251052",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753829755410177"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753830230027",
+            "cuentaDestino": "C1753759311136",
+            "tipo": "TRANSFERENCIA",
+            "monto": 25.5,
+            "fecha": "2025-07-29T18:06:29.425384427",
+            "descripcion": "Transferencia recibida",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830389425782"
+          },
+          {
+            "id": 0,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "cuentaDestino": "C1753830230027",
+            "tipo": "TRANSFERENCIA",
+            "monto": 5.5,
+            "fecha": "2025-07-29T18:07:42.721393624",
+            "descripcion": "Transferencia enviada",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830462721499"
+          },
+          {
+            "id": 15,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "cuentaDestino": "-",
+            "tipo": "PAGO_SERVICIO",
+            "monto": 45.34,
+            "fecha": "2025-07-29T18:13:04.128800574",
+            "descripcion": "Pago de servicio: Internet",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830784128364"
+          },
+          {
+            "id": 16,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "cuentaDestino": "-",
+            "tipo": "PAGO_SERVICIO",
+            "monto": 3.97,
+            "fecha": "2025-07-29T18:13:26.36327205",
+            "descripcion": "Pago de servicio: Agua",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830806363595"
+          },
+          {
+            "id": 17,
+            "usuarioId": 4,
+            "cuentaDeOrgingen": "C1753759311136",
+            "cuentaDestino": "-",
+            "tipo": "PAGO_SERVICIO",
+            "monto": 14.66,
+            "fecha": "2025-07-29T18:16:29.063688704",
+            "descripcion": "Pago de servicio: Teléfono",
+            "estado": "COMPLETADA",
+            "referencia": "TRX175383098906367"
+          }
+        ]
       }
     ],
-    "transacciones": []
+    "transacciones": [
+      {
+        "id": 1,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "tipo": "DEPOSITO",
+        "monto": 45.33,
+        "fecha": "2025-07-29T16:15:18.468804739",
+        "descripcion": "Depósito a cuenta",
+        "estado": "COMPLETADA",
+        "referencia": "TRX175382371846897"
+      },
+      {
+        "id": 2,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "tipo": "DEPOSITO",
+        "monto": 20.0,
+        "fecha": "2025-07-29T16:20:54.238647214",
+        "descripcion": "Depósito a cuenta",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753824054238943"
+      },
+      {
+        "id": 3,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "tipo": "DEPOSITO",
+        "monto": 45.33,
+        "fecha": "2025-07-29T16:44:50.536920172",
+        "descripcion": "Depósito a cuenta",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753825490537441"
+      },
+      {
+        "id": 4,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "tipo": "DEPOSITO",
+        "monto": 30.0,
+        "fecha": "2025-07-29T17:26:30.202011848",
+        "descripcion": "Depósito a cuenta",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753827990202784"
+      },
+      {
+        "id": 5,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "tipo": "DEPOSITO",
+        "monto": 23.67,
+        "fecha": "2025-07-29T17:34:18.678354037",
+        "descripcion": "Depósito a cuenta",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753828458678886"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 20.44,
+        "fecha": "2025-07-29T17:47:44.86795436",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829264868287"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 12.33,
+        "fecha": "2025-07-29T17:47:49.439500087",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829269439247"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 13.67,
+        "fecha": "2025-07-29T17:47:54.378792096",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829274378202"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 1.56,
+        "fecha": "2025-07-29T17:48:04.04091711",
+        "estado": "COMPLETADA",
+        "referencia": "TRX175382928404094"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 5.5,
+        "fecha": "2025-07-29T17:48:33.974282415",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829313974745"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 209.45,
+        "fecha": "2025-07-29T17:55:31.769355266",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829731769554"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 145.88,
+        "fecha": "2025-07-29T17:55:55.410251052",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753829755410177"
+      },
+      {
+        "id": 0,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753830230027",
+        "cuentaDestino": "C1753759311136",
+        "tipo": "TRANSFERENCIA",
+        "monto": 25.5,
+        "fecha": "2025-07-29T18:06:29.425384427",
+        "descripcion": "Transferencia recibida",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830389425782"
+      },
+      {
+        "id": 0,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "cuentaDestino": "C1753830230027",
+        "tipo": "TRANSFERENCIA",
+        "monto": 5.5,
+        "fecha": "2025-07-29T18:07:42.721393624",
+        "descripcion": "Transferencia enviada",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830462721499"
+      },
+      {
+        "id": 15,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "cuentaDestino": "-",
+        "tipo": "PAGO_SERVICIO",
+        "monto": 45.34,
+        "fecha": "2025-07-29T18:13:04.128800574",
+        "descripcion": "Pago de servicio: Internet",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830784128364"
+      },
+      {
+        "id": 16,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "cuentaDestino": "-",
+        "tipo": "PAGO_SERVICIO",
+        "monto": 3.97,
+        "fecha": "2025-07-29T18:13:26.36327205",
+        "descripcion": "Pago de servicio: Agua",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830806363595"
+      },
+      {
+        "id": 17,
+        "usuarioId": 4,
+        "cuentaDeOrgingen": "C1753759311136",
+        "cuentaDestino": "-",
+        "tipo": "PAGO_SERVICIO",
+        "monto": 14.66,
+        "fecha": "2025-07-29T18:16:29.063688704",
+        "descripcion": "Pago de servicio: Teléfono",
+        "estado": "COMPLETADA",
+        "referencia": "TRX175383098906367"
+      }
+    ],
+    "cuentaActiva": 0
+  },
+  {
+    "id": 5,
+    "nombre": "tester",
+    "correo": "tester@gmail.com",
+    "clave": "123",
+    "cedula": "4-3434-344",
+    "telefono": "6323-2323",
+    "fechaDeNacimiento": "12/07/1990",
+    "cuentas": [
+      {
+        "numerodecuenta": "C1753830230027",
+        "tipo": "CORRIENTE",
+        "saldo": 15.0,
+        "activa": true,
+        "historial": [
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 50.5,
+            "fecha": "2025-07-29T18:04:21.244262155",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830261244469"
+          },
+          {
+            "id": 0,
+            "usuarioId": 5,
+            "cuentaDeOrgingen": "C1753830230027",
+            "cuentaDestino": "C1753759311136",
+            "tipo": "TRANSFERENCIA",
+            "monto": 25.5,
+            "fecha": "2025-07-29T18:06:29.425253027",
+            "descripcion": "Transferencia enviada",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830389425513"
+          },
+          {
+            "id": 0,
+            "usuarioId": 5,
+            "cuentaDeOrgingen": "C1753759311136",
+            "cuentaDestino": "C1753830230027",
+            "tipo": "TRANSFERENCIA",
+            "monto": 5.5,
+            "fecha": "2025-07-29T18:07:42.721667474",
+            "descripcion": "Transferencia recibida",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753830462721123"
+          },
+          {
+            "id": 4,
+            "usuarioId": 5,
+            "cuentaDeOrgingen": "C1753830230027",
+            "cuentaDestino": "-",
+            "tipo": "PAGO_SERVICIO",
+            "monto": 15.0,
+            "fecha": "2025-07-29T18:19:33.197333513",
+            "descripcion": "Pago de servicio: Luz",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753831173197165"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 1.5,
+            "fecha": "2025-07-29T18:20:12.346795594",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753831212346669"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 2.0,
+            "fecha": "2025-07-29T18:20:21.198312436",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753831221198885"
+          }
+        ]
+      }
+    ],
+    "transacciones": [
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 50.5,
+        "fecha": "2025-07-29T18:04:21.244262155",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830261244469"
+      },
+      {
+        "id": 0,
+        "usuarioId": 5,
+        "cuentaDeOrgingen": "C1753830230027",
+        "cuentaDestino": "C1753759311136",
+        "tipo": "TRANSFERENCIA",
+        "monto": 25.5,
+        "fecha": "2025-07-29T18:06:29.425253027",
+        "descripcion": "Transferencia enviada",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830389425513"
+      },
+      {
+        "id": 0,
+        "usuarioId": 5,
+        "cuentaDeOrgingen": "C1753759311136",
+        "cuentaDestino": "C1753830230027",
+        "tipo": "TRANSFERENCIA",
+        "monto": 5.5,
+        "fecha": "2025-07-29T18:07:42.721667474",
+        "descripcion": "Transferencia recibida",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753830462721123"
+      },
+      {
+        "id": 4,
+        "usuarioId": 5,
+        "cuentaDeOrgingen": "C1753830230027",
+        "cuentaDestino": "-",
+        "tipo": "PAGO_SERVICIO",
+        "monto": 15.0,
+        "fecha": "2025-07-29T18:19:33.197333513",
+        "descripcion": "Pago de servicio: Luz",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753831173197165"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 1.5,
+        "fecha": "2025-07-29T18:20:12.346795594",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753831212346669"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 2.0,
+        "fecha": "2025-07-29T18:20:21.198312436",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753831221198885"
+      }
+    ],
+    "cuentaActiva": 0
   }
 ]
