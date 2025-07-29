@@ -39,5 +39,24 @@
       }
     ],
     "transacciones": []
+  },
+  {
+    "id": 4,
+    "nombre": "test",
+    "correo": "test@yahoo.com",
+    "clave": "papu",
+    "cedula": "3-2323-122",
+    "telefono": "1234-1243",
+    "fechaDeNacimiento": "12/10/2005",
+    "cuentas": [
+      {
+        "numerodecuenta": "C1753759311136",
+        "tipo": "AHORRO",
+        "saldo": 0.0,
+        "activa": true,
+        "historial": []
+      }
+    ],
+    "transacciones": []
   }
 ]

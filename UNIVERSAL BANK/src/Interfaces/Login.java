@@ -21,7 +21,7 @@ public class Login extends JFrame {
     public Login() {
 
         setTitle("Login");
-        PanelConFondo panelConFondo = new PanelConFondo("UNIVERSAL BANK/src/Util/Imagenes/fondoproyecto.png");
+        PanelConFondo panelConFondo = new PanelConFondo("/Util/Imagenes/fondoproyecto.png");
         panelConFondo.setLayout(new BorderLayout());
 
         panelConFondo.add(panellogin, BorderLayout.CENTER);
@@ -110,8 +110,5 @@ public class Login extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        GestorDeDatos.cargarUsuario();
-        new Login();
-    }
+
 }

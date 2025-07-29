@@ -1,13 +1,19 @@
 package Util.Clases;
+
 import javax.swing.*;
 import java.awt.*;
-public class PanelConFondo extends JPanel{
 
+public class PanelConFondo extends JPanel {
     private Image fondo;
 
     public PanelConFondo(String ruta) {
-        ImageIcon imagen = new ImageIcon(ruta);
-        fondo = imagen.getImage();
+        try {
+            // Intenta cargar desde el classpath (src)
+            ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
+            fondo = imagen.getImage();
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar la imagen: " + ruta);
+        }
     }
 
     @Override
