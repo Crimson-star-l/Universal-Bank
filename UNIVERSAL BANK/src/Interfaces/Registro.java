@@ -3,9 +3,11 @@ package Interfaces;
 import Controlador.GestorDeDatos;
 import Modelo.Cuenta;
 import Modelo.Usuario;
+import Util.Clases.PanelConFondo;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,11 +27,18 @@ public class Registro extends JFrame {
 
     public Registro() {
         setTitle("Registro");
+        PanelConFondo panelConFondo = new PanelConFondo("/Util/Imagenes/fondoregistro.png");
+        panelConFondo.setLayout(new BorderLayout());
+
+        panelConFondo.add(Registro, BorderLayout.CENTER);
+        Registro.setOpaque(false);
+        setContentPane(panelConFondo);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,700);
         setLocationRelativeTo(null);
         setVisible(true);
-        setContentPane(Registro);
+
 
 
         registrarButton.addActionListener(actionEvent -> {

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 //Clase 
 public class GestorDeDatos {
-        private static final String USUARIOS_DATA = "UNIVERSAL BANK/src/Data/usuarios.json";
+        private static final String USUARIOS_DATA = "data/usuarios.json";
         private static List<Usuario> usuarios = new ArrayList<>();
         private static Gson gson = new GsonBuilder()
             .setPrettyPrinting()
