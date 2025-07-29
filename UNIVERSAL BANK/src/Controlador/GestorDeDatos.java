@@ -40,7 +40,7 @@ public class GestorDeDatos {
         ///
 
     //Carga la base de datos de usuarios :b
-    public static void CargarUsuario(){
+    public static void cargarUsuario(){
         try {
             File archivo = new File(USUARIOS_DATA);
             if (!archivo.exists()) {//llama a la función que crea la estructura incial del proyecto
