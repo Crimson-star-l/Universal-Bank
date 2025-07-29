@@ -228,72 +228,45 @@ public class GestorDeDatos {
     ///
 
 
-    public static boolean retirar(double monto, Cuenta cuenta, int usuarioId) {
-        if (monto <= 0) {
-            JOptionPane.showMessageDialog(null, "Monto inválido");
-            return false;
+    public static boolean retirar(Usuario usuario, Cuenta cuenta, double monto) {
+        if (cuenta != null && monto > 0 && cuenta.getSaldo() >= monto) {
+            cuenta.setSaldo(cuenta.getSaldo() - monto);
+
+            Transaccion nueva = new Transaccion();
+            nueva.setTipo(Transaccion.TipoTransaccion.RETIRO);
+            nueva.setMonto(monto);
+            nueva.setFechaHora(LocalDateTime.now());
+            nueva.setEstado(Transaccion.EstadoTransaccion.COMPLETADA);
+            nueva.setCuentaDestino("-");
+
+            cuenta.getHistorial().add(nueva);
+            usuario.getTransacciones().add(nueva);
+
+            return true;
         }
+        return false;
+    }
 
-        if (cuenta.getSaldo() < monto) {
-            JOptionPane.showMessageDialog(null, "Saldo insuficiente");
-            return false;
+    public static boolean depositar(Usuario usuario, Cuenta cuenta, double monto) {
+        if (cuenta != null && monto > 0) {
+            cuenta.setSaldo(cuenta.getSaldo() + monto);
+
+            Transaccion nueva = new Transaccion();
+            nueva.setTipo(Transaccion.TipoTransaccion.DEPOSITO);
+            nueva.setMonto(monto);
+            nueva.setFechaHora(LocalDateTime.now());
+            nueva.setEstado(Transaccion.EstadoTransaccion.COMPLETADA);
+            nueva.setCuentaDestino("-");
+
+            cuenta.getHistorial().add(nueva);
+            usuario.getTransacciones().add(nueva);
+
+            return true;
         }
-
-        cuenta.setSaldo(cuenta.getSaldo() - monto);
-
-        Transaccion t = new Transaccion(
-                usuarioId,
-                cuenta.getNumerodecuenta(),
-                Transaccion.TipoTransaccion.RETIRO,
-                monto,
-                "Retiro en ventanilla"
-        );
-        t.completarTransaccion();
-        cuenta.agregarTransaccion(t);
-
-        guardarUsuarios();
-        JOptionPane.showMessageDialog(null, "Retiro exitoso");
-        return true;
+        return false;
     }
 
 
-
-
-    public static boolean depositar(Usuario usuario, String numeroCuenta, double monto) {
-        if (monto <= 0) {
-            JOptionPane.showMessageDialog(null, "El monto debe ser mayor que 0");
-            return false;
-        }
-
-        Cuenta cuenta = usuario.getCuentas().stream()
-                .filter(c -> c.getNumerodecuenta().equals(numeroCuenta))
-                .findFirst()
-                .orElse(null);
-
-        if (cuenta == null) {
-            JOptionPane.showMessageDialog(null, "No existe cuenta con ese número");
-            return false;
-        }
-
-        // Actualizar saldo
-        cuenta.setSaldo(cuenta.getSaldo() + monto);
-
-        // Crear transacción
-        Transaccion transaccion = new Transaccion(
-                usuario.getId(),
-                numeroCuenta,
-                Transaccion.TipoTransaccion.DEPOSITO,
-                monto,
-                "Depósito a cuenta"
-        );
-        transaccion.setId(usuario.getTransacciones().size() + 1);
-        transaccion.completarTransaccion();
-
-        // Guardar en usuario
-        usuario.agregarTransaccion(transaccion);
-        guardarUsuarios();
-        return true;
-    }
 
     public static boolean transferir(Usuario emisor, String cuentaOrigen, String cuentaDestino, double monto) {
         if (monto <= 0) {
@@ -322,7 +295,7 @@ public class GestorDeDatos {
             return false;
         }
 
-        // Buscar el usuario destino de la transferencia si alguien llega a leer esto que sepa que me arrepiento de elegir este bendito proyecto .-.
+        // Buscar usuario receptor
         Usuario receptor = usuarios.stream()
                 .filter(u -> u.getCuentas().contains(destino))
                 .findFirst()
@@ -333,11 +306,11 @@ public class GestorDeDatos {
             return false;
         }
 
-        // Transferencia
+        // Realizar la transferencia
         origen.setSaldo(origen.getSaldo() - monto);
         destino.setSaldo(destino.getSaldo() + monto);
 
-        // Transacción emisor
+        // Transacción para emisor
         Transaccion transEmisor = new Transaccion(
                 emisor.getId(),
                 cuentaOrigen,
@@ -346,11 +319,10 @@ public class GestorDeDatos {
                 monto,
                 "Transferencia enviada"
         );
-        transEmisor.setId(emisor.getTransacciones().size() + 1);
-        transEmisor.completarTransaccion();
-        emisor.agregarTransaccion(transEmisor);
+        transEmisor.setEstado(Transaccion.EstadoTransaccion.COMPLETADA);
+        transEmisor.setFechaHora(LocalDateTime.now());
 
-        // Transacción receptor
+        // Transacción para receptor
         Transaccion transReceptor = new Transaccion(
                 receptor.getId(),
                 cuentaOrigen,
@@ -359,13 +331,63 @@ public class GestorDeDatos {
                 monto,
                 "Transferencia recibida"
         );
-        transReceptor.setId(receptor.getTransacciones().size() + 1);
-        transReceptor.completarTransaccion();
-        receptor.agregarTransaccion(transReceptor);
+        transReceptor.setEstado(Transaccion.EstadoTransaccion.COMPLETADA);
+        transReceptor.setFechaHora(LocalDateTime.now());
+
+        // Guardar en historial de ambas cuentas
+        origen.getHistorial().add(transEmisor);
+        destino.getHistorial().add(transReceptor);
+
+        // Guardar en historial de ambos usuarios
+        emisor.getTransacciones().add(transEmisor);
+        receptor.getTransacciones().add(transReceptor);
+
+        guardarUsuarios();
+        JOptionPane.showMessageDialog(null, "Transferencia realizada con éxito.");
+        return true;
+    }
+
+    public static boolean pagarServicio(Usuario usuario, String numeroCuenta, double monto, String tipoServicio) {
+        if (monto <= 0) {
+            JOptionPane.showMessageDialog(null, "El monto debe ser mayor que 0");
+            return false;
+        }
+
+        Cuenta cuenta = usuario.getCuentas().stream()
+                .filter(c -> c.getNumerodecuenta().equals(numeroCuenta))
+                .findFirst()
+                .orElse(null);
+
+        if (cuenta == null) {
+            JOptionPane.showMessageDialog(null, "Cuenta no encontrada");
+            return false;
+        }
+
+        if (cuenta.getSaldo() < monto) {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente");
+            return false;
+        }
+
+        cuenta.setSaldo(cuenta.getSaldo() - monto);
+
+        Transaccion trans = new Transaccion(
+                usuario.getId(),
+                numeroCuenta,
+                "-", // No hay cuenta destino
+                Transaccion.TipoTransaccion.PAGO_SERVICIO,
+                monto,
+                "Pago de servicio: " + tipoServicio
+        );
+        trans.setId(usuario.getTransacciones().size() + 1);
+        trans.completarTransaccion();
+
+        usuario.agregarTransaccion(trans);
+        cuenta.getHistorial().add(trans);
 
         guardarUsuarios();
         return true;
     }
+
 
 
 
