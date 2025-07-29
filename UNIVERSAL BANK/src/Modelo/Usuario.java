@@ -13,6 +13,7 @@ public class Usuario {
     private String fechaDeNacimiento;
     private List<Cuenta> cuentas;
     private List<Transaccion> transacciones;
+    private  int cuentaActiva = 0;
 
 
     public Usuario(int id, String nombre,String correo,String clave,String cedula,String telefono,String Fechadenacimiento) {
@@ -50,17 +51,21 @@ public class Usuario {
 
     public List<Cuenta> getCuentas() { return cuentas; }
 
-    public void agregarCuenta(Cuenta cuenta) {
-        cuentas.add(cuenta);
-    }
-
     public Cuenta getCuentaActiva() {
-        for (Cuenta c : cuentas) {
-            if (c.getActiva() != null && c.getActiva()) {
-                return c;
-            }
+        if (cuentas != null && !cuentas.isEmpty()) {
+            return cuentas.get(cuentaActiva);
         }
         return null;
+    }
+
+    public void setCuentaActiva(int indice) {
+        if (indice >= 0 && indice < cuentas.size()) {
+            cuentaActiva = indice;
+        }
+    }
+
+    public void agregarCuenta(Cuenta cuenta) {
+        cuentas.add(cuenta);
     }
 
     public void cambiarCuentaActiva(String numeroCuenta) {
