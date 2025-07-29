@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 //Clase 
 public class GestorDeDatos {
-        private static final String USUARIOS_DATA = "data/usuarios.json";
-        private static List<Usuario> usuarios = new ArrayList<>();
+    private static final String USUARIOS_DATA = System.getProperty("user.dir") + "/data/usuarios.json";
+    private static List<Usuario> usuarios = new ArrayList<>();
         private static Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .registerTypeAdapter(LocalDateTime.class, new Adaptador())
@@ -367,47 +367,6 @@ public class GestorDeDatos {
         return true;
     }
 
-
-    ///
-    /// Métodos utilitarios
-    /// Sección de métodos de utilitarios (cosas pa admin y pruebas)
-    ///
-
-
-/*--------------------------------------------------------------------------------------------------------------------------------------------
-* TODO
-*  --Llenar la clase transacción, terminar las funciones de la clase controlador, dibujar los fondos de los paneles, buscar más información de la lógica de los bancos
-*
-*
-* Como pueden ver adelante el proyecto lo más que pude queria adelantar más pero me detuve
-* por un error tonto y ademas de que tuve que ver varios tutoriales con respecto a los archivos de tipo .json
-* si les soy honesto no se del exactamente  si el programa compila hmmmm mejor dicho si compila más no se  si hace lo que quiero
-* pero eso va a ser un problema que veré el domingo como saben no voy a poder estar presente mañana (el sabado)
-* por lo que ustedes solo procuren hacer las cosas que les puse a hacer y si la tiene antes del domingo es mejor jejejejejejjajajajajja
-*
-*
-*-------------------IMPORTANTE-------------------
-*
-* Como pueden ver esta clase tiene 2 errores no les hagan caso van a ser resueltos 1 de ellos por chris y el otro me encargo yo
-*
-*
-* -------------------------------------------------MANDAMIENTOS------------------------------------------------
-*hay 3 cosas que son muy importantes, tomenlo como mandamientos del proyecto
-*
-* 1.- NO TOCARE EL PAQUETE QUE DICE LIB NI SU CONTENIDO (LO PUEDEN VER PERO NO LE HAGAN NADA .-.)
-* 2.- NO TOCARE LA FUNCIÓN crearUsuario() que está en la claseGestoDeDatos
-* 3.- NO TRABAJARÉ EN LA CLASE GestorDeDatos SI NO SE ME PIDIÓ .-. (esta clase es muy volátil)
-*
-*--------------------------------------------------------------------------------------------------------------------------------------------
-*
-*
-* -------------------------------------------------Resumen del proyecto------------------------------------------------
-*
-* Actualmente todas las clases inciales está preparadas solo falta seguir trabajando en la  lógica para que lo ultimo que hagamos sea el diseño del programa
-* El paquete llamado Data de momento no tiene nada sin embargo una vez se empieza a llenar la base de datos va a tener un archivo .json
-*
-* --------------------------------------------------------------------------------------------------------------------
-* */
 
 
 }
