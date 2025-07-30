@@ -38,6 +38,8 @@ public class PortalPrincipal extends JFrame {
     private JButton salirButton;
 
     public PortalPrincipal() {
+        actualizarTablaTransacciones(usuarioActivo.getCuentaActiva().getHistorial());//formatea el historial de transacciones me dio paja hacer una función global
+        //al final si lo hice ._.
         setTitle("Home");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
@@ -45,26 +47,27 @@ public class PortalPrincipal extends JFrame {
 
         setContentPane(panelprincipal);
 
+        //Este es el icono del usuario la imagen circula que esta en gris
         ImageIcon iconousuario = new ImageIcon(getClass().getResource("/Util/Imagenes/usericon.jpg"));
         Image iconoescalado = iconousuario.getImage().getScaledInstance(125, 125, Image.SCALE_SMOOTH);
         usericon.setIcon(new ImageIcon(iconoescalado));
 
-        Usuario usuarioactivo = usuarioActivo;
-        if (usuarioactivo != null) {
+        Usuario usuarioactivo = usuarioActivo; //obtiene el usuario que está conectado actualemente
+        if (usuarioactivo != null) {// y despliega los datos de cuenta
             lbnombre.setText(usuarioactivo.getNombre());
             lbcorreo.setText(usuarioactivo.getCorreo());
             lbtelefono.setText(usuarioactivo.getTelefono());
             lbcedula.setText(usuarioactivo.getCedula());
         }
 
-        Cuenta cuentaActual = usuarioactivo.getCuentaActiva();
+        Cuenta cuentaActual = usuarioactivo.getCuentaActiva();//lo mismo despliega los datos solo que de la cuenta activa
         if (cuentaActual != null) {
             lbsaldo.setText(String.format("%.2f", cuentaActual.getSaldo()));
             lbcuentanum.setText(cuentaActual.getNumerodecuenta());
             lbtipocuenta.setText(cuentaActual.getTipo().toString());
         }
 
-        List<Transaccion> transacciones = usuarioactivo.getTransacciones();
+        List<Transaccion> transacciones = usuarioactivo.getTransacciones();// obtiene el historial de transacciones y despliega sus datos en el jtable
         String[] columnas = {"Tipo", "Monto", "Fecha", "Cuenta destino"};
         Object[][] datos = new Object[transacciones.size()][columnas.length];
         /*Explicación breve de que es Object ya que está bien interesante al parecer la clase Object es una superclase de todas las clases
@@ -74,7 +77,7 @@ public class PortalPrincipal extends JFrame {
         for (int i = 0; i < transacciones.size(); i++) {
             Transaccion t = transacciones.get(i);
             datos[i][0] = t.getTipo().toString();
-            datos[i][1] = String.format("%.2f", t.getMonto());
+            datos[i][1] = String.format("$%.2f", t.getMonto());
             datos[i][2] = t.getFechaHora();
             datos[i][3] = t.getCuentaDestino() != null ? t.getCuentaDestino() : "-";
         }
@@ -94,6 +97,8 @@ public class PortalPrincipal extends JFrame {
 
         paneltransacciones.add(scrollPane, BorderLayout.CENTER);
         setVisible(true);
+
+        verificarEstadoCuentas();
 
         depostiobt.addActionListener(e -> {
             String input = JOptionPane.showInputDialog(this, "Ingrese el monto a depositar:");
@@ -206,8 +211,51 @@ public class PortalPrincipal extends JFrame {
             }
         });
 
-        cambiarDeCuentaButton.addActionListener(e -> {
+        crearUnaNuevaCuentaButton.addActionListener(e -> {
+            List<Cuenta> cuentas = usuarioActivo.getCuentas();
+            boolean tieneAhorro = cuentas.stream().anyMatch(c -> c.getTipo() == Cuenta.TipoCuenta.AHORRO);
+            boolean tieneCorriente = cuentas.stream().anyMatch(c -> c.getTipo() == Cuenta.TipoCuenta.CORRIENTE);
 
+            String tipoACrear = null;
+            if (!tieneAhorro) {
+                tipoACrear = "AHORRO";
+            } else if (!tieneCorriente) {
+                tipoACrear = "CORRIENTE";
+            }
+
+            int confirmacion = JOptionPane.showConfirmDialog(null,
+                    "¿Deseas crear una cuenta de tipo " + tipoACrear + "?",
+                    "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                Cuenta.TipoCuenta tipoEnum = Cuenta.TipoCuenta.valueOf(tipoACrear);
+                Cuenta nueva = new Cuenta(tipoEnum, 0.0);
+                usuarioActivo.getCuentas().add(nueva);
+                GestorDeDatos.guardarUsuarios();
+
+                JOptionPane.showMessageDialog(null, "Cuenta " + tipoACrear + " creada exitosamente.");
+                verificarEstadoCuentas(); // actualiza botones
+            }
+        });
+
+        cambiarDeCuentaButton.addActionListener(e -> {
+            List<Cuenta> cuentas = usuarioActivo.getCuentas();
+            Cuenta cuentaActiva = usuarioActivo.getCuentaActiva();
+
+            // Busca la otra cuenta que no es la activa
+            for (int i = 0; i < cuentas.size(); i++) {
+                Cuenta c = cuentas.get(i);
+                if (!c.equals(usuarioActivo.getCuentaActiva())) {
+                    usuarioActivo.setCuentaActiva(i); // <- aquí es donde se cambia la activa
+                    GestorDeDatos.guardarUsuarios();
+                    JOptionPane.showMessageDialog(null, "Has cambiado a tu cuenta " + c.getTipo());
+                    break;
+                }
+            }
+
+
+            // Actualiza el panel principal porque si no se queda con el historial de transacciones de la otra cuenta
+            actualizarPanel();
         });
 
         salirButton.addActionListener(e -> {
@@ -218,7 +266,7 @@ public class PortalPrincipal extends JFrame {
 
         addWindowListener(new WindowAdapter() {//Esto lo acabo de descubrir en stackoverflow xD
             @Override//En pocas palabras no quise resolver un bug y entonces decidí mejor capturar el evento LOL
-            public void windowClosing(WindowEvent e) {//cuando se sale por el exit_on_close (boton de x) guarda los usuarios
+            public void windowClosing(WindowEvent e) {//cuando se sale por el exit_on_close (boton de x) guarda los usuarios y actualiza la tabla que era el bug
                 actualizarTablaTransacciones(transacciones);
                 GestorDeDatos.guardarUsuarios(); //
             }
@@ -230,13 +278,67 @@ public class PortalPrincipal extends JFrame {
 
         for (int i = 0; i < transacciones.size(); i++) {
             Transaccion t = transacciones.get(i);
-            datos[i][0] = t.getTipo().toString();
-            datos[i][1] = t.getMonto();
-            datos[i][2] = t.getFechaHora();
-            datos[i][3] = (t.getCuentaDestino() != null) ? t.getCuentaDestino() : "-";
 
+            // Determinar si el monto es ingreso o egreso
+            String montoFormateado;
+            switch (t.getTipo()) {
+                case DEPOSITO:
+                    montoFormateado = "$" + String.format("%.2f", t.getMonto());
+                    break;
+                case RETIRO:
+                case PAGO_SERVICIO:
+                    montoFormateado = "- $" + String.format("%.2f", t.getMonto());
+                    break;
+                case TRANSFERENCIA:
+                    // Ver si fue enviada o recibida según el usuario activo
+                    if (t.getCuentaOrigen().equals(usuarioActivo.getCuentaActiva().getNumerodecuenta())) {
+                        montoFormateado = "- $" + String.format("%.2f", t.getMonto());
+                    } else {
+                        montoFormateado = "+$" + String.format("%.2f", t.getMonto());
+                    }
+                    break;
+                default:
+                    montoFormateado = "$" + String.format("%.2f", t.getMonto());
+                    break;
+            }
+
+            datos[i][0] = t.getTipo().toString();
+            datos[i][1] = montoFormateado;
+            datos[i][2] = t.getFechaFormateada();
+            datos[i][3] = (t.getCuentaDestino() != null) ? t.getCuentaDestino() : "-";
         }
 
-        tbhistorial.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+        tbhistorial.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));//set hmm ? establece el modelo de diseño del jtable
+    }
+
+    private void verificarEstadoCuentas() {
+        List<Cuenta> cuentas = usuarioActivo.getCuentas();
+
+        boolean tieneAhorro = false;
+        boolean tieneCorriente = false;
+
+        for (Cuenta c : cuentas) {
+            if (c.getTipo() == Cuenta.TipoCuenta.AHORRO) {
+                tieneAhorro = true;
+            } else if (c.getTipo() == Cuenta.TipoCuenta.CORRIENTE) {
+                tieneCorriente = true;
+            }
+        }
+
+        cambiarDeCuentaButton.setEnabled(tieneAhorro && tieneCorriente);
+        crearUnaNuevaCuentaButton.setEnabled(!(tieneAhorro && tieneCorriente));
+    }
+
+    private void actualizarPanel() {
+        Cuenta cuentaActiva = usuarioActivo.getCuentaActiva();
+        if (cuentaActiva == null) return;
+
+        // Actualiza campos visibles con formato correcto para saldo
+        lbsaldo.setText("Saldo: $" + String.format("%.2f", cuentaActiva.getSaldo()));
+        lbcuentanum.setText("N° Cuenta: " + cuentaActiva.getNumerodecuenta());
+        lbtipocuenta.setText("Tipo: " + cuentaActiva.getTipo());
+
+        // Actualiza tabla de transacciones
+        actualizarTablaTransacciones(cuentaActiva.getHistorial());
     }
 }

@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Adaptador extends TypeAdapter<LocalDateTime> {
+
+    //Esta clase es literalmente un adaptador de la variable o clase LocalDate ya que al parecer el archivo en formato .json
+    // no puede transformarla adecuadamente
     private final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     @Override

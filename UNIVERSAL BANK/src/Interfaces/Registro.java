@@ -39,8 +39,6 @@ public class Registro extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-
-
         registrarButton.addActionListener(actionEvent -> {
             String nombre = textFieldnombre.getText();
             if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
