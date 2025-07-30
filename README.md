@@ -38,10 +38,9 @@ Aplicación de escritorio que simula un sistema bancario, desarrollada en **Java
 ---
 
 ## Requisitos
+- Requisitos del sistema: Sistema Operativo Windows 10, macOs 12.0 (Monterrey) o versiones de estos sistemas operativos posteriores. Linux compatible con distribuciones con Linux kernel 6.x y glibc 2.28 o superior utilizando versión de escritorio GNOME y KDE. Alternativas recientes según el desarrollador Ubuntu LTS y Fedora. 
+- Java Development Kit (JDK) versión 17 o superior. La versión utilizada para el desarrollo de está aplicación IntelliJ IDEA 2025.1.4.1, el entorno pedirá descargar la versión JDK 24.
 
-- Java 8 o superior
-- IDE compatible con Java Swing (recomendado: IntelliJ IDEA)
-- Sistema operativo: Windows, Linux o macOS
 
 ---
 
