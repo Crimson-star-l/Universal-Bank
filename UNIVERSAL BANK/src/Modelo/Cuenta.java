@@ -3,57 +3,58 @@ package Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Cuenta {
+    //me parece que ya explique que era un enum ehmm creo ?
+    public enum TipoCuenta {
+        AHORRO, CORRIENTE
+    }
+
     private String numerodecuenta;
     private TipoCuenta tipo;
     private double saldo;
-    private Boolean activa; //busca la cuenta aciva me ahorro detalles porque queda largo el texto
     private List<Transaccion> historial;
 
-    public enum TipoCuenta {
-        AHORRO,
-        CORRIENTE
-    }
-
-
-
-    public Cuenta(TipoCuenta tipo,  double saldoInicial) {
+    public Cuenta(TipoCuenta tipo, double saldoInicial) {
         this.numerodecuenta = generarNumeroUnico();
         this.tipo = tipo;
         this.saldo = saldoInicial;
-        this.activa = false;
         this.historial = new ArrayList<>();
     }
 
-
-
-
-    private String generarNumeroUnico() {
-        return "C" + System.currentTimeMillis(); //vamos ya sabemos que hace no voy a explicar denuevo .-.
+    public Cuenta(TipoCuenta tipo) {
+        this(tipo, 0.0);
     }
 
-    public List<Transaccion> getHistorial() {return historial;}
+    private String generarNumeroUnico() {
+        return "CUENTA-" + System.currentTimeMillis();  // Puedes mejorar esto si deseas.
+    }
 
-    public String getNumerodecuenta() {return numerodecuenta;}
+    public String getNumerodecuenta() {
+        return numerodecuenta;
+    }
 
-    public TipoCuenta getTipo() {return tipo;}
-    public void setTipo(TipoCuenta tipo) {this.tipo = tipo;}
+    public TipoCuenta getTipo() {
+        return tipo;
+    }
 
-    public double getSaldo() {return saldo;}
-    public void setSaldo(double saldo) {this.saldo = saldo;}
+    public double getSaldo() {
+        return saldo;
+    }
 
-    public Boolean getActiva() {return activa;}
-    public void setActiva(Boolean activa) {this.activa = activa;}
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public List<Transaccion> getHistorial() {
+        return historial;
+    }
 
     public void agregarTransaccion(Transaccion t) {
         historial.add(t);
     }
 
-
-    //para mostrar en gui
     @Override
     public String toString() {
-        return tipo + " | Nº: " + numerodecuenta + " | Saldo: $" + saldo;
+        return tipo + " - " + numerodecuenta;
     }
 }

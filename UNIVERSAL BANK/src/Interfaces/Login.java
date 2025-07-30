@@ -38,8 +38,6 @@ public class Login extends JFrame {
             panellogin.requestFocusInWindow();
         });
 
-
-
         correoOnombretext.setText("Ingrese su correo o usuario");
         correoOnombretext.setForeground(Color.GRAY);
 

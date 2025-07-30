@@ -72,7 +72,7 @@ public class GestorDeDatos {
             File archivo = new File(USUARIOS_DATA);
             archivo.getParentFile().mkdirs();
 
-            // Escribir JSON
+            // Escribir el arcivo de formato .json
             FileWriter writer = new FileWriter(archivo);
             gson.toJson(usuarios, writer);
             writer.close();
@@ -113,7 +113,7 @@ public class GestorDeDatos {
             return false;
         }
 
-        // Crear usuario
+        // Crear el usuario
         Usuario nuevo = new Usuario(proximoid, nombre, correo, clave, cedula, telefono, fechaNacimiento);
         usuarios.add(nuevo);
         proximoid++;
@@ -140,11 +140,11 @@ public class GestorDeDatos {
                 .findFirst()
                 .orElse(null);
 
-        /// Este monstruos es lo mismo que el de arriba
+        /// Este monstruos es lo mismo que el de arriba .-.
     }
 
     public static Usuario validarLogin(String correoOnombre, String clave) {
-        for (Usuario usuario : usuarios) {
+        for (Usuario usuario : usuarios) {// esto recorre toda la lista de usuarios
             boolean coincideCorreo = usuario.getCorreo().equals(correoOnombre);
             boolean coincideNombre = usuario.getNombre().equals(correoOnombre);
             boolean claveCorrecta = usuario.getClave().equals(clave);
@@ -192,23 +192,21 @@ public class GestorDeDatos {
             return false;
         }
 
-        // Desactivar cuentas actuales
-        for (Cuenta c : usuario.getCuentas()) {
-            c.setActiva(false);
-        }
-
         // Crear una nueva cuenta
         Cuenta nuevaCuenta = new Cuenta(tipo, 0.0);
-        nuevaCuenta.setActiva(true);
 
+        // Agregar la nueva cuenta al usuario
         usuario.getCuentas().add(nuevaCuenta);
+
+        // Establecer la nueva cuenta como activa (última agregada)
+        usuario.setCuentaActiva(usuario.getCuentas().size() - 1);
+
         guardarUsuarios();
 
         JOptionPane.showMessageDialog(null, "La nueva cuenta fue creada exitosamente");
         return true;
+
     }
-
-
 
 
     public static Cuenta buscarCuentaid(String numerodecuenta){
@@ -228,7 +226,7 @@ public class GestorDeDatos {
     ///
 
 
-    public static boolean retirar(Usuario usuario, Cuenta cuenta, double monto) {
+    public static boolean retirar(Usuario usuario, Cuenta cuenta, double monto) {//función pa retirar su nombre lo dice
         if (cuenta != null && monto > 0 && cuenta.getSaldo() >= monto) {
             cuenta.setSaldo(cuenta.getSaldo() - monto);
 
@@ -247,7 +245,7 @@ public class GestorDeDatos {
         return false;
     }
 
-    public static boolean depositar(Usuario usuario, Cuenta cuenta, double monto) {
+    public static boolean depositar(Usuario usuario, Cuenta cuenta, double monto) {//deposita dinero a la cuenta .-.
         if (cuenta != null && monto > 0) {
             cuenta.setSaldo(cuenta.getSaldo() + monto);
 
@@ -267,9 +265,8 @@ public class GestorDeDatos {
     }
 
 
-
     public static boolean transferir(Usuario emisor, String cuentaOrigen, String cuentaDestino, double monto) {
-        if (monto <= 0) {
+        if (monto <= 0) {//transfiere dinero a otro usuario
             JOptionPane.showMessageDialog(null, "El monto debe ser mayor que 0");
             return false;
         }

@@ -68,11 +68,6 @@ public class Usuario {
         cuentas.add(cuenta);
     }
 
-    public void cambiarCuentaActiva(String numeroCuenta) {
-        for (Cuenta c : cuentas) {
-            c.setActiva(c.getNumerodecuenta().equals(numeroCuenta));
-        }
-    }
 
     public void agregarTransaccion(Transaccion t) {
         transacciones.add(t);
