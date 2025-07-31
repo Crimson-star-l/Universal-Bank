@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static Interfaces.Login.usuarioActivo;
@@ -36,6 +35,7 @@ public class PortalPrincipal extends JFrame {
     private JLabel jbtitulo;
     private JButton crearUnaNuevaCuentaButton;
     private JButton salirButton;
+    private JButton actualizarButton;
 
     public PortalPrincipal() {
         actualizarTablaTransacciones(usuarioActivo.getCuentaActiva().getHistorial());//formatea el historial de transacciones me dio paja hacer una función global
@@ -264,6 +264,10 @@ public class PortalPrincipal extends JFrame {
             System.exit(0);
         });
 
+        actualizarButton.addActionListener(e -> {
+            actualizarTablaTransacciones(transacciones);
+        });
+
         addWindowListener(new WindowAdapter() {//Esto lo acabo de descubrir en stackoverflow xD
             @Override//En pocas palabras no quise resolver un bug y entonces decidí mejor capturar el evento LOL
             public void windowClosing(WindowEvent e) {//cuando se sale por el exit_on_close (boton de x) guarda los usuarios y actualiza la tabla que era el bug
@@ -335,7 +339,7 @@ public class PortalPrincipal extends JFrame {
 
         // Actualiza campos visibles con formato correcto para saldo
         lbsaldo.setText("Saldo: $" + String.format("%.2f", cuentaActiva.getSaldo()));
-        lbcuentanum.setText("N° Cuenta: " + cuentaActiva.getNumerodecuenta());
+        lbcuentanum.setText(cuentaActiva.getNumerodecuenta());
         lbtipocuenta.setText("Tipo: " + cuentaActiva.getTipo());
 
         // Actualiza tabla de transacciones
