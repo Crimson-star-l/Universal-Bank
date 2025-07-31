@@ -12,6 +12,7 @@ Aplicación de escritorio que simula un sistema bancario, desarrollada en **Java
 - **Registro de usuario** con opción para seleccionar tipo de cuenta (ahorros o corriente).
 - **Interfaz principal** con las siguientes funcionalidades:
 
+    - **Actualizar**: actualiza o refresca el historial de transacciones del usuario
     - **Depósito**: permite depositar dinero a la cuenta actual.
     - **Retiro**: permite retirar dinero de la cuenta actual.
     - **Transferencia**: transfiere dinero a otra cuenta o usuario.
