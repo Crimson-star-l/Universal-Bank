@@ -6,12 +6,6 @@ Aplicación de escritorio que simula un sistema bancario, desarrollada en **Java
 
 ---
 
-## Diagrama de Clases
-
-[Ver diagrama](https://surl.li/znwuzr)
-
----
-
 ## Características principales
 
 - **Inicio de sesión** con validación de nombre/correo y contraseña.
