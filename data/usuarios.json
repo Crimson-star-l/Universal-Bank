@@ -876,5 +876,72 @@
       }
     ],
     "cuentaActiva": 0
+  },
+  {
+    "id": 6,
+    "nombre": "papu",
+    "correo": "papu@hotmail.com",
+    "clave": "123",
+    "cedula": "3-121-2122",
+    "telefono": "2112-3222",
+    "fechaDeNacimiento": "12/12/2005",
+    "cuentas": [
+      {
+        "numerodecuenta": "C1753937042032",
+        "tipo": "AHORRO",
+        "saldo": 6.5,
+        "historial": [
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "DEPOSITO",
+            "monto": 12.0,
+            "fecha": "2025-07-30T23:44:24.774411656",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753937064774474"
+          },
+          {
+            "id": 0,
+            "usuarioId": 0,
+            "cuentaDestino": "-",
+            "tipo": "RETIRO",
+            "monto": 5.5,
+            "fecha": "2025-07-30T23:44:37.261311793",
+            "estado": "COMPLETADA",
+            "referencia": "TRX1753937077261605"
+          }
+        ]
+      },
+      {
+        "numerodecuenta": "C1753937085710",
+        "tipo": "CORRIENTE",
+        "saldo": 0.0,
+        "historial": []
+      }
+    ],
+    "transacciones": [
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "DEPOSITO",
+        "monto": 12.0,
+        "fecha": "2025-07-30T23:44:24.774411656",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753937064774474"
+      },
+      {
+        "id": 0,
+        "usuarioId": 0,
+        "cuentaDestino": "-",
+        "tipo": "RETIRO",
+        "monto": 5.5,
+        "fecha": "2025-07-30T23:44:37.261311793",
+        "estado": "COMPLETADA",
+        "referencia": "TRX1753937077261605"
+      }
+    ],
+    "cuentaActiva": 1
   }
 ]

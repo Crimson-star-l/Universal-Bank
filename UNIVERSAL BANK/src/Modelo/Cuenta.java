@@ -26,7 +26,7 @@ public class Cuenta {
     }
 
     private String generarNumeroUnico() {
-        return "CUENTA-" + System.currentTimeMillis();  // Puedes mejorar esto si deseas.
+        return "C" + System.currentTimeMillis(); // Genera un número unico en base a los milis segundos bla bla bla
     }
 
     public String getNumerodecuenta() {

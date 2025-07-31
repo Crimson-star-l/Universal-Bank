@@ -6,7 +6,6 @@ import Modelo.Usuario;
 import Util.Clases.PanelConFondo;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +23,7 @@ public class Registro extends JFrame {
     private JPanel Registro;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
+    private JButton regresarButton;
 
     public Registro() {
         setTitle("Registro");
@@ -121,6 +121,11 @@ public class Registro extends JFrame {
             JOptionPane.showMessageDialog(null,"Usuario creado exitosamente");
 
             GestorDeDatos.guardarUsuarios();
+            new Login();
+            dispose();
+        });
+
+        regresarButton.addActionListener(e -> {
             new Login();
             dispose();
         });
