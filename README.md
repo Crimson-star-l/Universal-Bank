@@ -16,6 +16,7 @@ Aplicación de escritorio que simula un sistema bancario, desarrollada en **Java
     - **Depósito**: permite depositar dinero a la cuenta actual.
     - **Retiro**: permite retirar dinero de la cuenta actual.
     - **Transferencia**: transfiere dinero a otra cuenta o usuario.
+    - **Pagar Servicios**: permite al usuario pagar servicios como luz, agua, internet, etc.
     - **Crear cuenta**: permite crear una nueva cuenta (ahorros o corriente).
     - **Cambiar de cuenta**: alterna entre cuentas si el usuario posee más de una.
     - **Salir**: cierra la aplicación de forma segura.
